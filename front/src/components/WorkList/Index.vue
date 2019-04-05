@@ -13,14 +13,9 @@ export default {
   components: {
     WorkListItem
   },
-  data () {
-    return {
-      items: [
-        { message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' },
-        { message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' },
-        { message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' },
-        { message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' }
-      ]
+  computed: {
+    items () {
+      return this.$store.getters.TaskList
     }
   }
 }
