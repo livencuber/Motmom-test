@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Index/>
+    <notifications class="mt-3"/>
   </div>
 </template>
 
