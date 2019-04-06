@@ -3,7 +3,7 @@
       <ul class="list-group text-left">
           <li class="list-group-item" v-if="error">Сервер временно не доступен</li>
           <li class="list-group-item text-center" v-if="fetching"><Loader></Loader></li>
-          <li class="list-group-item"  v-for="item in items" :key="item.id"><WorkListItem :event="item.name"/></li>
+          <li class="list-group-item"  v-for="item in items" :key="item.id"><WorkListItem :event="item"/></li>
       </ul>
   </div>
 </template>

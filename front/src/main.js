@@ -10,6 +10,7 @@ import store from './store'
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(Notifications)
+Vue.use(require('vue-moment'))
 
 /* eslint-disable no-new */
 new Vue({
