@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Tasks;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,4 +44,22 @@ class ApiController extends Controller
 
         return $this->json($task);
     }
+
+    /**
+     * @Route("/task/{id}/", methods={"DELETE"})
+     */
+    public function tasksDeleteAction(Request $request)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $task = $entityManager->getRepository(Tasks::class)->find($request->attributes->get('id'));
+
+        $entityManager->remove($task);
+        $entityManager->flush();
+
+        return new Response();
+    }
+
+
 }
