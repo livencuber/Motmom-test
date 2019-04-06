@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import * as api from '../api/task'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store(
@@ -14,13 +16,23 @@ const store = new Vuex.Store(
       ]
     },
     actions: {
-      fetchTasks () {
-
+      fetchTasks ({ commit }) {
+        api.fetchTasks().then(
+          (response) => {
+            const tasks = response.data.results
+            commit('setTasks', tasks)
+          }
+        )
       }
     },
     getters: {
       TaskList: state => {
         return state.tasks
+      }
+    },
+    mutations: {
+      setTasks (state, tasks) {
+        state.tasks = tasks
       }
     }
 
