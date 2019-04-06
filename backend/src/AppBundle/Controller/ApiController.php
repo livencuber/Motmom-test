@@ -27,15 +27,15 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/task/add", methods={"POST"})
+     * @Route("/task/add/", methods={"POST"})
      */
     public function tasksAddAction(Request $request)
     {
 
         $entityManager = $this->getDoctrine()->getManager();
 
-
         $task = new Tasks();
+
         $task->setName($request->request->get('name'));
         $task->setTime(new \DateTime($request->request->get('time')));
 

@@ -8,8 +8,14 @@
       <WorkList/>
     </div>
     <div>
-      <b-modal centered  ok-only id="AddTask" title="Добавить событие">
-        <b-form-input placeholder="Название"></b-form-input>
+      <b-modal  hide-footer id="AddTask" title="Добавить событие">
+        <div class="text-left">
+          <span>Название</span>
+        <b-form-input placeholder="Название" class="mb-4"></b-form-input>
+        <span>Время</span>
+        <b-form-input type="time" class="w-25 mb-5"></b-form-input>
+        </div>
+        <b-button class="mb-3" variant="info" block @click="toggleModal">Добавить</b-button>
       </b-modal>
     </div>
   </div>
@@ -22,6 +28,11 @@ export default {
   name: 'Index',
   components: {
     WorkList
+  },
+  methods: {
+    toggleModal () {
+      this.$store.dispatch('addTask')
+    }
   }
 }
 </script>

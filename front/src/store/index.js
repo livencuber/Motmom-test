@@ -35,6 +35,18 @@ const store = new Vuex.Store(
             type: 'error'
           })
         })
+      },
+      addTask () {
+        const data = {
+          name: 'testbutton',
+          time: '18:00'
+        }
+        api.addTask(data).then(() => {
+          Vue.notify({
+            title: 'Добавлено новое событие',
+            type: 'succes'
+          })
+        })
       }
     },
     getters: {
