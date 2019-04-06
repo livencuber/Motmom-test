@@ -24,4 +24,23 @@ class ApiController extends Controller
 
         return $this->json($tasks);
     }
+
+    /**
+     * @Route("/task/add", methods={"POST"})
+     */
+    public function tasksAddAction(Request $request)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+
+        $task = new Tasks();
+        $task->setName($request->request->get('name'));
+        $task->setTime(new \DateTime($request->request->get('time')));
+
+        $entityManager->persist($task);
+        $entityManager->flush();
+
+        return $this->json($task);
+    }
 }
