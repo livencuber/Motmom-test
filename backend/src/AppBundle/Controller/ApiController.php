@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiController extends Controller
 {
     /**
-     * @Route("/tasks", name="3")
+     * @Route("/tasks")
      */
     public function tasksAction(Request $request)
     {
@@ -59,6 +59,31 @@ class ApiController extends Controller
         $entityManager->flush();
 
         return new Response();
+    }
+
+    /**
+     * @Route("/tasks/time/", methods={"POST"})
+     */
+    public function tasksChangeTimeAction(Request $request)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $taskIds = $request->request->get('tasks');
+
+        $tasks = [];
+        foreach ($taskIds as $taskId) {
+
+            $task = $entityManager->getRepository(Tasks::class)->find($taskId);
+            $task->setTime(new \DateTime($request->request->get('time')));
+            $entityManager->persist($task);
+            $tasks[] = $task;
+
+        }
+
+        $entityManager->flush();
+
+        return $this->json($tasks);
     }
 
 
