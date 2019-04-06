@@ -10,6 +10,10 @@ Vue.use(Notifications)
 const store = new Vuex.Store(
   {
     state: {
+      newTask: {
+        name: null,
+        time: '00:00'
+      },
       tasks: {
         payload: [],
         fetching: false,
@@ -37,10 +41,7 @@ const store = new Vuex.Store(
         })
       },
       addTask () {
-        const data = {
-          name: 'testbutton',
-          time: '18:00'
-        }
+        const data = this.state.newTask
         api.addTask(data).then(() => {
           Vue.notify({
             title: 'Добавлено новое событие',
@@ -52,6 +53,9 @@ const store = new Vuex.Store(
     getters: {
       Tasks: state => {
         return state.tasks
+      },
+      newTask: state => {
+        return state.newTask
       }
     },
     mutations: {
@@ -63,6 +67,12 @@ const store = new Vuex.Store(
       },
       setTasksError (state, status) {
         state.tasks.error = status
+      },
+      updateNameTask (state, name) {
+        state.newTask.name = name
+      },
+      updateTimeTask (state, time) {
+        state.newTask.time = time
       }
     }
 
