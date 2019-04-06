@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiController extends Controller
 {
     /**
-     * @Route("/tasks")
+     * @Route("/tasks/")
      */
     public function tasksAction(Request $request)
     {
