@@ -22,7 +22,7 @@ const store = new Vuex.Store(
         commit('setTasksError', false)
         api.fetchTasks().then(
           (response) => {
-            const tasks = response.data.results
+            const tasks = response.data
             commit('setTasksFetching', false)
             commit('setTasks', tasks)
           }
