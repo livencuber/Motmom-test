@@ -10,6 +10,10 @@ Vue.use(Notifications)
 const store = new Vuex.Store(
   {
     state: {
+      newTask: {
+        name: null,
+        time: '00:00'
+      },
       tasks: {
         payload: [],
         fetching: false,
@@ -22,7 +26,7 @@ const store = new Vuex.Store(
         commit('setTasksError', false)
         api.fetchTasks().then(
           (response) => {
-            const tasks = response.data.results
+            const tasks = response.data
             commit('setTasksFetching', false)
             commit('setTasks', tasks)
           }
@@ -35,11 +39,33 @@ const store = new Vuex.Store(
             type: 'error'
           })
         })
+      },
+      addTask ({dispatch}) {
+        const data = this.state.newTask
+        api.addTask(data).then(() => {
+          Vue.notify({
+            title: 'Добавлено новое событие',
+            type: 'succes'
+          })
+        })
+        dispatch('fetchTasks')
+      },
+      deleteTask ({dispatch}, id) {
+        api.deleteTask(id).then(() => {
+          Vue.notify({
+            title: 'Событие удалено',
+            type: 'succes'
+          })
+          dispatch('fetchTasks')
+        })
       }
     },
     getters: {
       Tasks: state => {
         return state.tasks
+      },
+      newTask: state => {
+        return state.newTask
       }
     },
     mutations: {
@@ -51,6 +77,12 @@ const store = new Vuex.Store(
       },
       setTasksError (state, status) {
         state.tasks.error = status
+      },
+      updateNameTask (state, name) {
+        state.newTask.name = name
+      },
+      updateTimeTask (state, time) {
+        state.newTask.time = time
       }
     }
 

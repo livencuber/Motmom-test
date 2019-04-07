@@ -8,20 +8,20 @@
       <WorkList/>
     </div>
     <div>
-      <b-modal centered  ok-only id="AddTask" title="Добавить событие">
-        <b-form-input placeholder="Название"></b-form-input>
-      </b-modal>
     </div>
+    <ModalAddTask/>
   </div>
 </template>
 
 <script>
 import WorkList from './WorkList'
+import ModalAddTask from './ModalAddTask'
 
 export default {
   name: 'Index',
   components: {
-    WorkList
+    WorkList,
+    ModalAddTask
   }
 }
 </script>
