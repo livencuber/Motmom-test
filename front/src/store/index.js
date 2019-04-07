@@ -3,12 +3,16 @@ import Vuex from 'vuex'
 import Notifications from 'vue-notification'
 
 import * as api from '../api/task'
+import timeList from './timeList'
 
 Vue.use(Vuex)
 Vue.use(Notifications)
 
 const store = new Vuex.Store(
   {
+    modules: {
+      timeList: timeList
+    },
     state: {
       newTask: {
         name: null,
