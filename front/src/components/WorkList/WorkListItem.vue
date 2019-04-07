@@ -38,7 +38,6 @@ export default {
       set (value) {
         this.$store.commit('updateCheckedTask', { id: this.event.id, value })
         const taskForTime = _.uniq(this.$store.getters.checkedTask.map((item) => (item.time)))
-        console.log(taskForTime, taskForTime.length)
         if (taskForTime.length === 1) {
           this.$store.commit('disabledTime', {time: taskForTime[0]})
         } else {

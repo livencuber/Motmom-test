@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     setTimes (item) {
-      this.$store.dispatch('changeTime', item)
+      if (this.$store.getters.checkedTask.length) this.$store.dispatch('changeTime', item)
     }
   }
 }
