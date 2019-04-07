@@ -1,5 +1,10 @@
+import Vue from 'vue'
 import Moment from 'moment'
 import { extendMoment } from 'moment-range'
+import * as api from '../api/task'
+import Notifications from 'vue-notification'
+
+Vue.use(Notifications)
 
 const moment = extendMoment(Moment)
 
@@ -11,6 +16,19 @@ const timeList =
       time_interval: 30
     },
     actions: {
+      changeTime ({dispatch}, time) {
+        const data = {
+          time,
+          tasks: this.getters.checkedTask.map((item) => (item.id))
+        }
+        api.changeTime(data).then((responce) => {
+          Vue.notify({
+            title: 'Время изменено',
+            type: 'success'
+          })
+          dispatch('fetchTasks')
+        })
+      }
 
     },
     getters: {

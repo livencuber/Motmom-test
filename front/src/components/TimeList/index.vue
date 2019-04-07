@@ -4,7 +4,7 @@
             <h5 class="card-title text-muted">Время событий</h5>
             <ul class="list-inline text-left">
                 <li class="list-inline-item mb-1" v-for="item in times" v-bind:key="item.id">
-                    <button type="button" class="btn btn-outline-secondary pt-0 pb-0">{{item | moment("HH:mm")}}</button>
+                    <button type="button" class="btn btn-outline-secondary pt-0 pb-0" @click="setTimes(item)">{{item | moment("HH:mm")}}</button>
                 </li>
             </ul>
         </div>
@@ -17,6 +17,11 @@ export default {
   computed: {
     times () {
       return this.$store.getters.times
+    }
+  },
+  methods: {
+    setTimes (item) {
+      this.$store.dispatch('changeTime', item.utc().toString())
     }
   }
 }
