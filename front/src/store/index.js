@@ -40,13 +40,23 @@ const store = new Vuex.Store(
           })
         })
       },
-      addTask () {
+      addTask ({dispatch}) {
         const data = this.state.newTask
         api.addTask(data).then(() => {
           Vue.notify({
             title: 'Добавлено новое событие',
             type: 'succes'
           })
+        })
+        dispatch('fetchTasks')
+      },
+      deleteTask ({dispatch}, id) {
+        api.deleteTask(id).then(() => {
+          Vue.notify({
+            title: 'Событие удалено',
+            type: 'succes'
+          })
+          dispatch('fetchTasks')
         })
       }
     },
