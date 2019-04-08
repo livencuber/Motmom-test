@@ -16,7 +16,7 @@ const store = new Vuex.Store({
   state: {
     newTask: {
       name: null,
-      time: '00:00'
+      time: null
     },
     tasks: {
       payload: [],
@@ -45,15 +45,23 @@ const store = new Vuex.Store({
           })
         })
     },
-    addTask ({ dispatch }) {
+    addTask ({dispatch, commit}, payload) {
       const data = this.state.newTask
       api.addTask(data).then(() => {
         Vue.notify({
           title: 'Добавлено новое событие',
           type: 'success'
         })
+        dispatch('fetchTasks')
+        payload.hide()
+        commit('updateNameTask', null)
+        commit('updateTimeTask', null)
+      }).catch(() => {
+        Vue.notify({
+          title: 'Ошибка добавления события',
+          type: 'error'
+        })
       })
-      dispatch('fetchTasks')
     },
     deleteTask ({ dispatch }, id) {
       api.deleteTask(id).then(() => {
