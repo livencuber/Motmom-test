@@ -56,7 +56,7 @@ const store = new Vuex.Store({
         payload.hide()
         commit('updateNameTask', null)
         commit('updateTimeTask', null)
-      }).catch(() => {
+      }, () => {
         Vue.notify({
           title: 'Ошибка добавления события',
           type: 'error'
