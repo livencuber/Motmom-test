@@ -19,7 +19,6 @@ const timeList =
     },
     actions: {
       changeTime ({dispatch, commit}, time) {
-        console.log(moment.unix(time).utc().format())
         const data = {
           time: moment.unix(time).utc().format(),
           tasks: this.getters.checkedTask.map((item) => (item.id))
